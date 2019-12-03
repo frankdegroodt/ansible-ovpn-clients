@@ -1,0 +1,5 @@
+---
+- name: OpenVPN | Add Clients | Add clients and generate keys
+  include: add_gen_key.yml
+  when: clients_to_add is defined
+

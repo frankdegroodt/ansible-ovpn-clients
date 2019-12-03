@@ -1,0 +1,26 @@
+# By default the DN is randomly generated and organizational mode is used.
+valid_clients:
+  - name: frank
+
+# path where fetched credentials are stored
+local_creds_folder: "{{ playbook_dir }}/fetched_creds"
+
+openvpn_path: "/etc/openvpn"
+openvpn_path_pki: "{{ openvpn_path }}/easy-rsa/easyrsa3/pki"
+openvpn_path_keys: "{{ openvpn_path_pki }}/private"
+openvpn_path_certs: "{{ openvpn_path_pki }}/issued"
+openvpn_path_reqs: "{{ openvpn_path_pki }}/reqs"
+openvpn_hmac_firewall: "{{ openvpn_path_pki }}/ta.key"
+openvpn_ca_cert: "{{ openvpn_path_pki }}/ca.crt"
+openvpn_path_easyrsa: "{{ openvpn_path }}/easy-rsa/easyrsa3"
+dhparams_size: "{{ openvpn_key_size }}"
+dhparams_location: "{{ openvpn_path_pki }}/dh.pem"
+openvpn_crl: "{{ openvpn_path_pki }}/crl.pem"
+openvpn_server_common_name_file: "{{ openvpn_path }}/{{ ansible_facts['nodename'] }}"
+
+openvpn_key_size: "2048"
+openvpn_cipher: "AES-256-CBC"
+openvpn_auth_digest: "SHA256"
+openvpn_tls_cipher: "TLS-DHE-DSS-WITH-AES-256-GCM-SHA384:TLS-DHE-RSA-WITH-AES-256-GCM-SHA384:TLS-DHE-RSA-WITH-AES-256-CBC-SHA256:TLS-DHE-DSS-WITH-AES-256-CBC-SHA256"
+
+openvpn_easyrsa_version: v3.0.6
