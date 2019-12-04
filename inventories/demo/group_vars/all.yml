@@ -1,21 +1,52 @@
-# By default the DN is randomly generated and organizational mode is used.
 valid_clients:
   - name: frank
+  - name: henk
+  - name: pieter
+
+# By default the DN is randomly generated and organizational mode is used.
+openvpn_key_country:  "NL"
+openvpn_key_province: "Noord-Holland"
+openvpn_key_city: "Amsterdam"
+openvpn_key_org: "Red Hat NL"
+openvpn_key_ou: "Solution Architects"
+openvpn_key_email: "fdegrood@redhat.com"
+inventory_hostname: "1.1.1.1"
+
+easyrsa_dn_mode_cn_only: false
+openvpn_server_common_name_manual: "ovpn.sonicrevolutions.local"
+
+openvpn_instances:
+  - {
+      proto: tcp,
+      port: 443,
+      mask: "192.168.231.0 255.255.255.0",
+      cidr: "192.168.231.0/24",
+      server_extra_options: ['route 172.16.0.0 255.240.0.0', 'push "route 172.16.0.0 255.240.0.0"'],
+      client_extra_options: [],
+ }
+
 
 # path where fetched credentials are stored
 local_creds_folder: "{{ playbook_dir }}/fetched_creds"
 
+# This variable will be used as the `remote` directive in the OpenVPN configuration.
+# So make sure this is resolvable by the clients.
+# If this is not the case with `inventory_hostname`, one could use `ansible_default_ipv4.address`.
+openvpn_server_remote_host: "{{ inventory_hostname }}"
+
 openvpn_path: "/etc/openvpn"
-openvpn_path_pki: "{{ openvpn_path }}/easy-rsa/easyrsa3/pki"
+openvpn_path_ccd: "{{ openvpn_path }}/ccd"
+openvpn_path_pki: "{{ openvpn_path }}/pki"
 openvpn_path_keys: "{{ openvpn_path_pki }}/private"
 openvpn_path_certs: "{{ openvpn_path_pki }}/issued"
 openvpn_path_reqs: "{{ openvpn_path_pki }}/reqs"
 openvpn_hmac_firewall: "{{ openvpn_path_pki }}/ta.key"
 openvpn_ca_cert: "{{ openvpn_path_pki }}/ca.crt"
-openvpn_path_easyrsa: "{{ openvpn_path }}/easy-rsa/easyrsa3"
+openvpn_path_easyrsa: "{{ openvpn_path }}/easyrsa/easyrsa3"
 dhparams_size: "{{ openvpn_key_size }}"
 dhparams_location: "{{ openvpn_path_pki }}/dh.pem"
 openvpn_crl: "{{ openvpn_path_pki }}/crl.pem"
+
 openvpn_server_common_name_file: "{{ openvpn_path }}/{{ ansible_facts['nodename'] }}"
 
 openvpn_key_size: "2048"

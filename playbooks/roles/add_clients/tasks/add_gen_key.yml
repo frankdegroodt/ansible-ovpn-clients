@@ -47,13 +47,14 @@
 
 - name: OpenVPN | Add Clients | Build Clients
   expect:
-    command: ./easyrsa build-client-full "{{ item[0] }}"
+    command: ./easyrsa build-client-full "{{ item[0] }}" --req-cn "{{ item[0] }}"
     responses:
       'Enter PEM pass phrase:$': "{{ item[1].stdout }}"
       'Verifying - Enter PEM pass phrase:$': "{{ item[1].stdout }}"
+      'Enter pass phrase for .*?:$': "{{ ca_password }}"
     chdir: "{{ openvpn_path_easyrsa }}"
     creates: "{{ openvpn_path_keys }}/{{ item[0] }}.key"
-  no_log: true
+  no_log: false
   with_together:
     - "{{ clients_to_add }}"
     - "{{ client_pk_passwords.results }}"
