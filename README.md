@@ -1,3 +1,3 @@
 # ansible-ovpn-clients
 
-Adding and removing OpenVPN clients.
+Install OpenVPN and manage clients.
