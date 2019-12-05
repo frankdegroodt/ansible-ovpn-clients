@@ -2,18 +2,18 @@
 # ========================================================
   hosts: "{{ cmd_hosts | default('openvpn') }}"
 
-# You need a python 2 interpreter first, so skip gathering facts, then use
-# 'setup:' to get them after the python 2 interpreter has been installed.
+# You need a python 3 interpreter first, so skip gathering facts, then use
+# 'setup:' to get them after the python 3 interpreter has been installed.
 # See 'pre_tasks' below
   gather_facts: False
   pre_tasks:
     # If python doesn't exist on path (type returns non-zero), install python
-    - name: OpenVPN | install | Install python2 if necessary
+    - name: OpenVPN | install | Install python3 if necessary
       yum:
-       name: 'python2'
+       name: 'python3'
        state: latest
 
-    - name: OpenVPN | install | Gather facts after python2 is available
+    - name: OpenVPN | install | Gather facts after python3 is available
       setup:
 
   roles:

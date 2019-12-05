@@ -16,7 +16,7 @@
     dest: "{{ openvpn_path }}/server/{{ item.proto }}-{{ item.port }}.conf"
   with_items: "{{ openvpn_instances }}"
   notify:
-    - start openvpn
+    - start openvpn-server
 
 - name: OpenVPN | systemd | Enable services
   service:

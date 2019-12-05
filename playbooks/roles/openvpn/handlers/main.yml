@@ -5,8 +5,8 @@
     executable: /bin/bash
   changed_when: false
 
-- name: start openvpn
+- name: start openvpn-server
   service:
-    name: "openvpn@{{ item.proto }}-{{ item.port }}.service"
+    name: "openvpn-server@{{ item.proto }}-{{ item.port }}.service"
     state: started
   with_items: "{{ openvpn_instances }}"

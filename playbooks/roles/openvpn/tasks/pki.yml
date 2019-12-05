@@ -13,7 +13,7 @@
 #  become: False
 
 - name: OpenVPN | PKI | Generate a random server common name
-  shell: grep -v -P "[\x80-\xFF]" {{ path_dict }} | sed -e "s/'//" | shuf -n 2 | xargs | sed -e 's/ /./g' | cut -c 1-64 > {{ openvpn_server_common_name_file }}
+  shell: grep -v -P "[\x80-\xFF]" /usr/share/dict/words | sed -e "s/'//" | shuf -n 2 | xargs | sed -e 's/ /./g' | cut -c 1-64 > {{ openvpn_server_common_name_file }}
   args:
     creates: "{{ openvpn_server_common_name_file }}"
   when: openvpn_server_common_name_manual is not defined

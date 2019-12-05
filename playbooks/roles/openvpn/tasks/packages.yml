@@ -1,13 +1,4 @@
 ---
-- name: OpenVPN | package | Install {{ ansible_os_family }} specific packages
-  package:
-    name: "{{ item }}"
-  with_items: "{{ os_family_specific_pre }}"
-  register: install_specific_result
-  until: install_specific_result is success
-  retries: 5
-  delay: 5
-
 - name: OpenVPN | package | Install required packages
   package:
     name: "{{ item }}"
