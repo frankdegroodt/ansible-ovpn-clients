@@ -3,7 +3,7 @@ valid_clients:
   - name: henk
   - name: pieter
 
-# By default the DN is randomly generated and organizational mode is used.
+# Adjust to your needs
 openvpn_key_country:  "NL"
 openvpn_key_province: "Noord-Holland"
 openvpn_key_city: "Amsterdam"
@@ -11,9 +11,11 @@ openvpn_key_org: "Red Hat NL"
 openvpn_key_ou: "Solution Architects"
 openvpn_key_email: "fdegrood@redhat.com"
 inventory_hostname: "1.1.1.1"
+openvpn_server_common_name_manual: "ovpn.sonicrevolutions.local"
 
 easyrsa_dn_mode_cn_only: false
-openvpn_server_common_name_manual: "ovpn.sonicrevolutions.local"
+
+ca_password: "Make up something strong"
 
 openvpn_instances:
   - {
